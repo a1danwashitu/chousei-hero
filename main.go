@@ -2,6 +2,8 @@ package main
 
 import (
 	"fmt"
+	"io"
+	"net/http"
 	"syscall/js"
 )
 
@@ -13,11 +15,22 @@ func main() {
 	<-c
 }
 
-func registerCallbacks() {
-	js.Global().Set("output", js.FuncOf(output))
+func getCSV(hash string) string {
+	url := "https://chouseisan.com/schedule/List/createCsv?h=" + hash
+
+	resp, _ := http.Get(url)
+	defer resp.Body.Close()
+
+	byteArray, _ := io.ReadAll(resp.Body)
+
+	return string(byteArray)
 }
 
-func output(this js.Value, args []js.Value) interface{} {
+func registerCallbacks() {
+	js.Global().Set("output", js.FuncOf(outputChouseisan))
+}
+
+func outputChouseisan(this js.Value, args []js.Value) interface{} {
 	text := textToStr(args[0])
 
 	outputToHtml(text)
@@ -25,10 +38,10 @@ func output(this js.Value, args []js.Value) interface{} {
 }
 
 func textToStr(v js.Value) string {
-    return js.Global().Get("document").Call("getElementById", v.String()).Get("value").String()
+	return js.Global().Get("document").Call("getElementById", v.String()).Get("value").String()
 }
 
 func outputToHtml(text string) {
-    println("print:", text)
-    js.Global().Get("document").Call("getElementById", "output").Set("innerHTML", text)
+	println("print:", text)
+	js.Global().Get("document").Call("getElementById", "output").Set("innerHTML", text)
 }
