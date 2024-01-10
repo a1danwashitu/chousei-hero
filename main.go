@@ -18,8 +18,12 @@ func main() {
 func getCSV(hash string) string {
 	url := "https://chouseisan.com/schedule/List/createCsv?h=" + hash
 
+	fmt.Println("url:", url)
+
 	resp, _ := http.Get(url)
 	defer resp.Body.Close()
+
+	fmt.Println("input:", url)
 
 	byteArray, _ := io.ReadAll(resp.Body)
 
