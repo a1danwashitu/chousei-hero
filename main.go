@@ -33,6 +33,7 @@ func registerCallbacks() {
 func outputChouseisan(this js.Value, args []js.Value) interface{} {
 	hash := textToStr(args[0])
 	text := getCSV(hash)
+	fmt.Println("csv:", text)
 
 	outputToHtml(text)
 	return nil
