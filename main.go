@@ -31,7 +31,8 @@ func registerCallbacks() {
 }
 
 func outputChouseisan(this js.Value, args []js.Value) interface{} {
-	text := textToStr(args[0])
+	hash := textToStr(args[0])
+	text := getCSV(hash)
 
 	outputToHtml(text)
 	return nil
