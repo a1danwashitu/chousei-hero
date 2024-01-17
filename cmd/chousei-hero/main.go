@@ -2,9 +2,10 @@ package main
 
 import (
 	"fmt"
-	"io"
-	"net/http"
+	"strings"
 	"syscall/js"
+
+	"github.com/a1danwashitu/chousei-hero/io"
 )
 
 func main() {
@@ -15,31 +16,16 @@ func main() {
 	<-c
 }
 
-func getCSV(hash string) string {
-	url := "https://chouseisan.com/schedule/List/createCsv?h=" + hash
-
-	fmt.Println("url:", url)
-
-	resp, _ := http.Get(url)
-	defer resp.Body.Close()
-
-	fmt.Println("input:", url)
-
-	byteArray, _ := io.ReadAll(resp.Body)
-
-	return string(byteArray)
-}
-
 func registerCallbacks() {
 	js.Global().Set("output", js.FuncOf(outputChouseisan))
 }
 
 func outputChouseisan(this js.Value, args []js.Value) interface{} {
-	hash := textToStr(args[0])
-	text := getCSV(hash)
-	fmt.Println("csv:", text)
+	text := textToStr(args[0])
 
-	outputToHtml(text)
+	m, d, c := io.ReadChouseisan(text)
+
+	outputToHtml(strings.Join([]string{m, d, c}, "\n"))
 	return nil
 }
 
