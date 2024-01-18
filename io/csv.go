@@ -27,12 +27,15 @@ func ReadChouseisanCSV(chouseiCSV string) *Event {
 
 	event.Schedule = make([]string, len(table)-2)
 	for i := range event.Schedule {
-		event.Schedule[i] = table[i][0]
+		event.Schedule[i] = table[i+1][0]
 	}
 
 	event.Members = table[0][1:]
 
-	event.Statuses = table[1 : len(event.Schedule)-1][1:]
+	event.Statuses = make([][]string, len(event.Schedule))
+	for i := range event.Statuses {
+		event.Statuses[i] = table[i+1][1:]
+	}
 
 	event.Coments = table[len(event.Schedule)-1][1:]
 
