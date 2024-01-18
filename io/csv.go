@@ -25,7 +25,7 @@ func ReadChouseisanCSV(chouseiCSV string) *Event {
 
 	table, _ := r.ReadAll()
 
-	event.Schedule = make([]string, len(row)-2)
+	event.Schedule = make([]string, len(table)-2)
 	for i := range event.Schedule {
 		event.Schedule[i] = table[i][0]
 	}
