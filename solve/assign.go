@@ -8,9 +8,9 @@ func (g *graph) getAssignments() []*io.Assignment {
 		duty := g.duties[i]
 
 		assignments[i] = &io.Assignment{
-			Duty: duty.name,
-			Assignees: make([]string, 0,duty.require),
-			Require: duty.require,
+			Duty:      duty.name,
+			Assignees: make([]string, 0, duty.require),
+			Require:   duty.require,
 		}
 	}
 
