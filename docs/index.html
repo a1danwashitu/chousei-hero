@@ -1,8 +1,8 @@
 <html>
     <head>
-       <meta charset="utf-8" />
-       <script src="wasm_exec.js"></script>
-       <script>
+        <meta charset="utf-8" />
+        <script src="wasm_exec.js"></script>
+        <script>
            const go = new Go();
            WebAssembly.instantiateStreaming(
                fetch("main.wasm"),
@@ -10,15 +10,34 @@
            ).then((result) => {
                go.run(result.instance);
            });
-       </script>
-   </head>
+        </script>
+        <style>
+            .textbox-container {
+                display: inline-block;
+            }
+            input {
+                margin-right: 10px;
+            }
+        </style>
+    </head>
     <body>
         <h1>Hello, World!</h1>
         <h3>調整さん csv 入力</h3>
-        <textarea id="text0" cols="70" rows="50" wrap="off"></textarea>
+        <textarea id="text0" cols="150" rows="30" wrap="off"></textarea>
         <button onClick="output('text0');" id="printButton">読み込み</button>
 
         <h2>設定入力</h2>
-        <textarea id="output" cols="70" rows="50" wrap="off"></textarea>
+
+        <div class="textbox-container">
+            <label for="textbox1">Textbox 1:</label>
+            <textarea id="duties" cols="70" rows="30" wrap="off"></textarea>
+        </div>
+    
+        <div class="textbox-container">
+            <label for="textbox2">Textbox 2:</label>
+            <textarea id="members" cols="70" rows="30" wrap="off"></textarea>
+        </div>
+
+        <textarea id="status" cols="70" rows="15" wrap="off"></textarea>
     </body>
 </html>

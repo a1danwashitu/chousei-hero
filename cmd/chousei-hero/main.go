@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"strings"
 	"syscall/js"
 
 	"github.com/a1danwashitu/chousei-hero/io"
@@ -25,7 +24,10 @@ func outputChouseisan(this js.Value, args []js.Value) interface{} {
 
 	m, d, c := io.ReadChouseisan(text)
 
-	outputToHtml(strings.Join([]string{m, d, c}, "\n"))
+	outputToHtml("duties", d)
+	outputToHtml("members", m)
+	outputToHtml("status", c)
+
 	return nil
 }
 
@@ -33,7 +35,7 @@ func textToStr(v js.Value) string {
 	return js.Global().Get("document").Call("getElementById", v.String()).Get("value").String()
 }
 
-func outputToHtml(text string) {
+func outputToHtml(id, text string) {
 	println("print:", text)
 	js.Global().Get("document").Call("getElementById", "output").Set("innerHTML", text)
 }
