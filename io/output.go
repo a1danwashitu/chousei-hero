@@ -1,6 +1,9 @@
 package io
 
-import "strings"
+import (
+	"fmt"
+	"strings"
+)
 
 type Assignment struct {
 	Duty      string
@@ -14,6 +17,7 @@ func OutputResult(assignments []*Assignment) string {
 		assignees := strings.Join(assign.Assignees, ", ")
 		row := assign.Duty + ": " + assignees + "\n"
 		res += row
+		fmt.Println(assign.Duty, assign.Require, assign.Assignees)
 	}
 
 	return res

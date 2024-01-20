@@ -1,6 +1,8 @@
 package solve
 
-import "github.com/a1danwashitu/chousei-hero/io"
+import (
+	"github.com/a1danwashitu/chousei-hero/io"
+)
 
 func (g *graph) getAssignments() []*io.Assignment {
 	assignments := make([]*io.Assignment, len(g.duties))
