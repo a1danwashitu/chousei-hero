@@ -33,6 +33,19 @@ type DutyConf struct {
 
 type Statuses [][]string
 
+func ReadConfStrings(members, duties, statuses string) *EventConf {
+	membersConf := UnmarshalMembers(members)
+	dutiesConf := UnmarshalDuties(duties)
+	statusesConf := UnmarshalStatuses(statuses)
+
+	return &EventConf{
+		Title: "",
+		Members: membersConf,
+		Duties: dutiesConf,
+		Statuses: statusesConf,
+	}
+}
+
 func ReadChouseisan(chouseiCSV string) (string, string, string) {
 	event := ReadChouseisanCSV(chouseiCSV)
 
