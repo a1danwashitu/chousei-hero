@@ -1,6 +1,8 @@
 package mincostflow
 
 func (g Graph) MinCostFlow(start, goal *Node, flows int) (int, any) {
+	g.initPot()
+
 	for ; flows > 0; flows-- {
 		g.Dijkstra(start)
 		if !goal.Used {
@@ -26,5 +28,11 @@ func (g Graph) updateCapacity(start, goal *Node) {
 func (g Graph) updatePotential() {
 	for _, node := range g {
 		node.Pot = ci.AddCost(node.Pot, node.Dist)
+	}
+}
+
+func (g Graph) initPot() {
+	for _, node := range g {
+		node.Pot = ci.NewCost()
 	}
 }
