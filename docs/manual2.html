@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>&#x4f7f;&#x3044;&#x65b9;</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="使い方">使い方</h1>
+<ol>
+<li>作業するディレクトリを作成する</li>
+<li>調整さんのページから <code>出欠表をダウンロードする</code> を選択する</li>
+<li>ダウンロードの設定はデフォルトのものを選択し、<code>chouseisan.csv</code> を 1. で作成したディレクトリにダウンロードする</li>
+<li>ターミナルで<pre><code>chousei-hero init {ディレクトリ名}
+</code></pre>
+を実行する</li>
+<li>作成したディレクトリに出力されたファイルを編集する
+<ol>
+<li>members.yaml
+<ol>
+<li>各 member の過去の当番の回数を count に入力する</li>
+</ol>
+</li>
+<li>duties.yaml
+<ol>
+<li>
+<p>日にちの階層を設定する</p>
+<p>duty1 を day1 の下に配置する</p>
+<pre><code>- name: day0
+  child:
+  - name: duty0
+    child:
+    - name: duty0
+      requiers: 1
+  - name: duty1
+    child:
+    - name: duty1
+      requiers: 1
+</code></pre>
+<p>-&gt;</p>
+<pre><code>- name: day0
+  child:
+  - name: duty0
+    child:
+    - name: duty0
+      requiers: 1
+- name: day1
+  child:
+  - name: duty1
+    child:
+    - name: duty1
+      requiers: 1
+</code></pre>
+</li>
+<li>
+<p>同時に入れない当番を設定する</p>
+<p>duty0-0 と duty0-1 を同時に入れない当番に設定する</p>
+<pre><code>- name: day0
+  child:
+  - name: duty0
+    child:
+    - name: duty0-0
+      requiers: 1
+  - name: duty0-1
+    child:
+    - name: duty0-1
+      requiers: 1
+</code></pre>
+<p>-&gt;</p>
+<pre><code>- name: day0
+  child:
+  - name: duty0
+    child:
+    - name: duty0-0
+      requiers: 1
+    - name: duty0-1
+      requiers: 1
+</code></pre>
+</li>
+<li>
+<p>当番に必要な人数を設定する</p>
+<p>duty0 の当番に必要な人数を設定する</p>
+<pre><code>- name: day0
+  child:
+  - name: duty0
+    child:
+    - name: duty0
+      requiers: 1
+</code></pre>
+<p>-&gt;</p>
+<pre><code>- name: day0
+  child:
+  - name: duty0
+    child:
+    - name: duty0
+      requiers: 3
+</code></pre>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>ターミナルで<pre><code>chousei-hero solve {ディレクトリ名}
+</code></pre>
+を実行する</li>
+</ol>
+
+            
+            
+</body>
+</html>

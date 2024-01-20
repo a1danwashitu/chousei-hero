@@ -13,17 +13,23 @@
         </script>
         <style>
             .textbox-container {
-                display: inline-block;
+                display: flex;
+                margin-bottom: 100px;
             }
             .textbox-sub {
                 display: block;
+                margin-right: 50px;
             }
-            input {
-                margin-right: 10px;
+            label {
+                display: block;
             }
         </style>
     </head>
     <body>
+        <h1>Chousei Hero</h1>
+        炊事当番、事務当番のシフトを自動で組みます。<br>
+        <a href="./manual.html" target="_blank" rel="noopener noreferrer">使い方</a><br>
+        <a href="https://github.com/a1danwashitu/chousei-hero" target="_blank" rel="noopener noreferrer">ソースコード</a>
         <h2>調整さん csv 入力</h2>
         <textarea id="text0" cols="150" rows="30" wrap="off"></textarea>
         <button onClick="output('text0');" id="printButton">読み込み</button>
@@ -35,10 +41,6 @@
                 <label for="textbox1">当番設定</label>
                 <textarea id="duties" cols="70" rows="30" wrap="off"></textarea>
             </div>
-            
-        </div>
-    
-        <div class="textbox-container">
             <div class="textbox-sub">
                 <label for="textbox2">メンバー設定</label>
                 <textarea id="members" cols="70" rows="30" wrap="off"></textarea>
