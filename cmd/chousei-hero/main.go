@@ -37,5 +37,5 @@ func textToStr(v js.Value) string {
 
 func outputToHtml(id, text string) {
 	println("print:", text)
-	js.Global().Get("document").Call("getElementById", "output").Set("innerHTML", text)
+	js.Global().Get("document").Call("getElementById", id).Set("innerHTML", text)
 }
