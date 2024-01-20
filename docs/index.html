@@ -15,29 +15,37 @@
             .textbox-container {
                 display: inline-block;
             }
+            .textbox-wrapper {
+                display: block;
+            }
             input {
                 margin-right: 10px;
             }
         </style>
     </head>
     <body>
-        <h1>Hello, World!</h1>
-        <h3>調整さん csv 入力</h3>
+        <h2>調整さん csv 入力</h2>
         <textarea id="text0" cols="150" rows="30" wrap="off"></textarea>
         <button onClick="output('text0');" id="printButton">読み込み</button>
 
         <h2>設定入力</h2>
 
         <div class="textbox-container">
-            <label for="textbox1">Textbox 1:</label>
-            <textarea id="duties" cols="70" rows="30" wrap="off"></textarea>
+            <div class="textbox-sub">
+                <label for="textbox1">当番設定</label>
+                <textarea id="duties" cols="70" rows="30" wrap="off"></textarea>
+            </div>
+            
         </div>
     
         <div class="textbox-container">
-            <label for="textbox2">Textbox 2:</label>
-            <textarea id="members" cols="70" rows="30" wrap="off"></textarea>
+            <div class="textbox-sub">
+                <label for="textbox2">メンバー設定</label>
+                <textarea id="members" cols="70" rows="30" wrap="off"></textarea>
+            </div>
         </div>
 
+        <label for="textbox3">ステータス設定</label>
         <textarea id="status" cols="70" rows="15" wrap="off"></textarea>
         <button onClick="output2('duties','members','status');">実行</button>
 

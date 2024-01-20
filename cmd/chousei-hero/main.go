@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"syscall/js"
 
 	"github.com/a1danwashitu/chousei-hero/io"
@@ -11,7 +10,6 @@ import (
 func main() {
 	c := make(chan struct{})
 
-	fmt.Println("Hello, World!")
 	registerCallbacks()
 	<-c
 }
@@ -54,6 +52,5 @@ func textToStr(v js.Value) string {
 }
 
 func outputToHtml(id, text string) {
-	println("print:", text)
 	js.Global().Get("document").Call("getElementById", id).Set("innerHTML", text)
 }
