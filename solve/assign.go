@@ -4,12 +4,14 @@ import "github.com/a1danwashitu/chousei-hero/io"
 
 func (g *graph) getAssignments() []*io.Assignment {
 	assignments := make([]*io.Assignment, len(g.duties))
-	for i, assign := range assignments {
+	for i := range assignments {
 		duty := g.duties[i]
 
-		assign.Duty = duty.name
-		assign.Assignees = make([]string, 0, duty.require)
-		assign.Require = duty.require
+		assignments[i] = &io.Assignment{
+			Duty: duty.name,
+			Assignees: make([]string, 0,duty.require),
+			Require: duty.require,
+		}
 	}
 
 	for _, member := range g.members {
