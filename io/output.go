@@ -1,7 +1,6 @@
 package io
 
 import (
-	"fmt"
 	"strings"
 )
 
@@ -17,7 +16,6 @@ func OutputResult(assignments []*Assignment) string {
 		assignees := strings.Join(assign.Assignees, ", ")
 		row := assign.Duty + ": " + assignees + "\n"
 		res += row
-		fmt.Println(assign.Duty, assign.Require, assign.Assignees)
 	}
 
 	return res
